@@ -173,6 +173,10 @@ function initSkillsFilter() {
   const skillTags = skillsContainer.querySelectorAll('.skill-tag');
   const totalSkills = skillTags.length;
 
+  if (skillsCount) {
+    skillsCount.textContent = `(${totalSkills} навыков)`;
+  }
+
   filterInput.addEventListener('input', (e) => {
     const query = e.target.value.trim().toLowerCase();
     let visibleCount = 0;

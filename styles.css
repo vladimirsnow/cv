@@ -304,6 +304,30 @@ main {
   flex-shrink: 0;
 }
 
+.badge-link {
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.badge-link:hover {
+  color: var(--text-primary);
+  transform: translateX(3px);
+}
+
+.badge-startup-tag {
+  background: var(--bg-card);
+  border: 1px solid var(--border-medium);
+  padding: 0.15rem 0.55rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
 .hero-contact-quick {
   display: flex;
   flex-direction: column;
@@ -899,17 +923,199 @@ main {
   line-height: 1.5;
 }
 
+/* Startup Venture Card Styling */
+.startup-card {
+  border-color: var(--border-medium);
+  position: relative;
+  overflow: hidden;
+}
+
+.startup-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--text-primary), transparent);
+}
+
+.highlight-badge {
+  color: var(--text-primary) !important;
+  border-color: var(--border-active) !important;
+  background-color: var(--bg-card) !important;
+}
+
+.startup-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  width: fit-content;
+  margin-top: 0.35rem;
+}
+
+.pulse-indicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #22c55e;
+  box-shadow: 0 0 6px rgba(34, 197, 94, 0.65);
+  display: inline-block;
+}
+
+.inline-text-link,
+.achieve-link {
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--border-medium);
+  transition: all var(--transition-fast);
+}
+
+.inline-text-link:hover,
+.achieve-link:hover {
+  text-decoration-color: var(--text-primary);
+}
+
+/* Extracurricular Sub-block (Under Achievements) */
+.extra-achievements-subblock {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px dashed var(--border-subtle);
+}
+
+.extra-caption {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 0.85rem;
+}
+
+.extra-caption svg {
+  color: var(--text-primary);
+}
+
+.achievement-item.extra-item {
+  border-style: dashed;
+  background-color: var(--bg-card);
+}
+
+.achievement-item.extra-item:hover {
+  border-color: var(--border-active);
+}
+
+.achieve-bullet.extra-bullet {
+  background-color: var(--text-primary);
+}
+
+/* Standalone Extracurricular Achievements & Volunteering Feature Card */
+.extracurricular-card {
+  margin-top: 2rem;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-medium);
+  border-radius: 8px;
+  padding: 2.25rem;
+  box-shadow: var(--shadow-subtle);
+  position: relative;
+}
+
+.extracurricular-header {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+.extracurricular-header svg {
+  color: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.extracurricular-title {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.extracurricular-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.extracurricular-item {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 1.25rem;
+  transition: all var(--transition-fast);
+}
+
+.extracurricular-item:hover {
+  border-color: var(--border-active);
+  transform: translateY(-2px);
+}
+
+.extra-item-tag {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.extra-item-title {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.extra-item-desc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
 /* ==========================================================================
    EDUCATION SECTION
    ========================================================================== */
+
+.education-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
 
 .education-card {
   background-color: var(--bg-card);
   border: 1px solid var(--border-medium);
   border-radius: 8px;
-  padding: 2.5rem;
+  padding: 2.25rem;
   box-shadow: var(--shadow-subtle);
   position: relative;
+  transition: all var(--transition-fast);
+}
+
+.education-card:hover {
+  border-color: var(--border-active);
+  transform: translateY(-2px);
 }
 
 .education-type-badge {
@@ -917,12 +1123,12 @@ main {
   letter-spacing: 0.1em;
   color: var(--text-muted);
   text-transform: uppercase;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
 }
 
 .education-grid {
   display: grid;
-  grid-template-columns: 140px 1fr auto;
+  grid-template-columns: minmax(170px, 190px) 1fr auto;
   align-items: center;
   gap: 2.5rem;
 }
@@ -935,20 +1141,21 @@ main {
 }
 
 .edu-year {
-  font-size: 1.8rem;
+  font-size: 1.45rem;
   font-weight: 700;
   color: var(--text-primary);
-  line-height: 1.1;
+  line-height: 1.2;
 }
 
 .edu-level {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: var(--text-muted);
+  margin-top: 0.25rem;
 }
 
 .edu-institution {
   font-family: var(--font-heading);
-  font-size: 1.8rem;
+  font-size: 1.55rem;
   font-weight: 700;
   color: var(--text-primary);
   margin-bottom: 0.35rem;
@@ -957,11 +1164,50 @@ main {
 .edu-field {
   font-size: 0.95rem;
   color: var(--text-secondary);
+  margin-bottom: 0.35rem;
+}
+
+.edu-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
 }
 
 .edu-icon-wrap {
   color: var(--text-muted);
-  padding-right: 1rem;
+  padding-right: 0.5rem;
+}
+
+.edu-highlights {
+  margin-top: 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px dashed var(--border-subtle);
+}
+
+.edu-highlights-title {
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-mono);
+}
+
+.edu-badges-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.edu-badges-list li {
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.edu-badges-list li strong {
+  color: var(--text-primary);
 }
 
 /* ==========================================================================
@@ -1414,7 +1660,8 @@ main {
   .hero-grid,
   .role-details-grid,
   .job-content-grid,
-  .contact-board {
+  .contact-board,
+  .extracurricular-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
