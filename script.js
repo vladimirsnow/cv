@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCopyButtons();
   initSkillsFilter();
   initScrollToTop();
+  initPhotoGallery();
 });
 
 /**
@@ -74,6 +75,89 @@ function initCopyButtons() {
       toast.classList.remove('show');
     }, 2800);
   }
+}
+
+/**
+ * Executive Photo Gallery & Lightbox Modal
+ */
+function initPhotoGallery() {
+  const mainImg = document.getElementById('main-profile-img');
+  const switchBtns = document.querySelectorAll('.photo-switch-btn');
+  const photoContainer = document.getElementById('profile-photo-container');
+  const zoomBtn = document.getElementById('btn-photo-zoom');
+  const modal = document.getElementById('photo-modal');
+  const modalImg = document.getElementById('photo-modal-img');
+  const modalCaption = document.getElementById('photo-modal-caption');
+  const modalClose = document.getElementById('photo-modal-close');
+  const modalBackdrop = document.getElementById('photo-modal-backdrop');
+
+  if (!mainImg || switchBtns.length === 0) return;
+
+  const photoTitles = {
+    '1': 'Медетбеков Джафар Дабырович — Официальный портрет (Портрет 1)',
+    '2': 'Медетбеков Джафар Дабырович — Официальный портрет (Портрет 2)'
+  };
+
+  // Switch photo
+  switchBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const targetSrc = btn.getAttribute('data-img');
+      const targetIndex = btn.getAttribute('data-index') || '1';
+      if (!targetSrc) return;
+
+      switchBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      mainImg.style.opacity = '0.3';
+      setTimeout(() => {
+        mainImg.src = targetSrc;
+        mainImg.style.opacity = '1';
+      }, 120);
+    });
+  });
+
+  // Open modal lightbox
+  function openLightbox() {
+    if (!modal || !modalImg) return;
+    const currentSrc = mainImg.src;
+    modalImg.src = currentSrc;
+    const activeBtn = document.querySelector('.photo-switch-btn.active');
+    const idx = activeBtn ? activeBtn.getAttribute('data-index') : '1';
+    if (modalCaption) {
+      modalCaption.textContent = photoTitles[idx] || 'Медетбеков Джафар Дабырович';
+    }
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    if (!modal) return;
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  if (photoContainer) {
+    photoContainer.addEventListener('click', openLightbox);
+  }
+
+  if (zoomBtn) {
+    zoomBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openLightbox();
+    });
+  }
+
+  if (modalClose) modalClose.addEventListener('click', closeLightbox);
+  if (modalBackdrop) modalBackdrop.addEventListener('click', closeLightbox);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
+      closeLightbox();
+    }
+  });
 }
 
 /**

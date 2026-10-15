@@ -383,32 +383,111 @@ main {
   box-shadow: var(--shadow-subtle);
 }
 
-.stat-highlight {
-  margin-bottom: 2rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid var(--border-subtle);
+/* Executive Portrait in Hero Sidebar */
+.profile-photo-wrapper {
+  margin-bottom: 1.75rem;
 }
 
-.stat-caption {
-  font-size: 0.78rem;
-  letter-spacing: 0.06em;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  margin-bottom: 0.35rem;
+.profile-photo-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1.06;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-medium);
+  box-shadow: var(--shadow-subtle);
+  cursor: pointer;
 }
 
-.stat-value {
-  font-size: 2.5rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--text-primary);
-  line-height: 1.1;
+.profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity var(--transition-fast);
 }
 
-.stat-sub {
-  font-size: 0.9rem;
+.profile-photo-container:hover .profile-img {
+  transform: scale(1.025);
+}
+
+.btn-photo-zoom {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: rgba(9, 9, 11, 0.75);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: all var(--transition-fast);
+  z-index: 3;
+}
+
+.profile-photo-container:hover .btn-photo-zoom {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.btn-photo-zoom:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.08);
+}
+
+.photo-switcher {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+  margin-top: 0.75rem;
+}
+
+.photo-switch-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 0.45rem 0.65rem;
+  cursor: pointer;
   color: var(--text-secondary);
-  margin-top: 0.2rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  transition: all var(--transition-fast);
+  text-align: left;
+}
+
+.photo-switch-btn:hover {
+  border-color: var(--border-medium);
+  color: var(--text-primary);
+  background: var(--bg-card-hover);
+}
+
+.photo-switch-btn.active {
+  border-color: var(--accent-contrast);
+  color: var(--text-primary);
+  background: var(--bg-card-hover);
+  box-shadow: 0 0 0 1px var(--accent-contrast);
+}
+
+.switch-thumb {
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid var(--border-subtle);
 }
 
 .stat-grid {
@@ -536,6 +615,62 @@ main {
 .spec-dash {
   color: var(--text-muted);
   font-family: var(--font-mono);
+}
+
+/* Alternate Roles Card */
+.alt-roles-card {
+  margin-top: 1.75rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+}
+
+.alt-roles-title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  margin-bottom: 0.45rem;
+}
+
+.alt-roles-title svg {
+  color: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.alt-roles-desc {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  margin-bottom: 0.85rem;
+  line-height: 1.4;
+}
+
+.alt-roles-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.alt-role-pill {
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.35rem 0.75rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-medium);
+  border-radius: 4px;
+  color: var(--text-primary);
+  transition: all var(--transition-fast);
+}
+
+.alt-role-pill:hover {
+  border-color: var(--accent-contrast);
+  background-color: var(--bg-card-hover);
+  transform: translateY(-1px);
 }
 
 .conditions-stack {
@@ -845,34 +980,75 @@ main {
   margin-bottom: 1.25rem;
 }
 
-.languages-card {
-  display: flex;
-  gap: 1rem;
+.languages-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
 }
 
-.lang-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
+.lang-card {
   background-color: var(--bg-card);
   border: 1px solid var(--border-medium);
-  padding: 0.75rem 1.5rem;
-  border-radius: 6px;
-  font-size: 0.95rem;
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: all var(--transition-fast);
 }
 
-.lang-name {
-  font-weight: 600;
+.lang-card:hover {
+  border-color: var(--border-active);
+  transform: translateY(-2px);
+}
+
+.lang-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.85rem;
+}
+
+.lang-num {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.lang-level-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-medium);
   color: var(--text-primary);
 }
 
-.lang-dash {
-  color: var(--text-muted);
+.lang-title {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.35rem;
 }
 
-.lang-level {
+.lang-level-title {
+  font-size: 0.82rem;
   color: var(--text-secondary);
-  font-size: 0.88rem;
+  margin-bottom: 1.15rem;
+}
+
+.lang-bar {
+  width: 100%;
+  height: 4px;
+  background: var(--bg-secondary);
+  border-radius: 2px;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+}
+
+.lang-progress {
+  height: 100%;
+  background: var(--text-primary);
+  border-radius: 2px;
 }
 
 .skills-block-header {
@@ -1141,6 +1317,96 @@ main {
 }
 
 /* ==========================================================================
+   PHOTO LIGHTBOX MODAL
+   ========================================================================== */
+
+.photo-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-fast), visibility var(--transition-fast);
+}
+
+.photo-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.photo-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  cursor: pointer;
+}
+
+.photo-modal-dialog {
+  position: relative;
+  z-index: 1;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: scale(0.94);
+  transition: transform var(--transition-fast);
+}
+
+.photo-modal.active .photo-modal-dialog {
+  transform: scale(1);
+}
+
+.photo-modal-close {
+  position: absolute;
+  top: -46px;
+  right: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.photo-modal-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: rotate(90deg);
+}
+
+.photo-modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.photo-modal-content img {
+  max-width: 85vw;
+  max-height: 78vh;
+  object-fit: contain;
+  border-radius: 8px;
+  border: 1px solid var(--border-medium);
+  box-shadow: var(--shadow-elevated);
+}
+
+.photo-modal-caption {
+  font-size: 0.85rem;
+  color: #a1a1aa;
+}
+
+/* ==========================================================================
    RESPONSIVE DESIGN (TABLET & MOBILE)
    ========================================================================== */
 
@@ -1151,6 +1417,10 @@ main {
   .contact-board {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+
+  .languages-grid {
+    grid-template-columns: 1fr;
   }
 
   .job-card-header {
